@@ -1,7 +1,10 @@
+var currentAnswer = '';
+var submission = '';
+var score = 0;
+
 $(document).ready(function() {
-	var score = 0;
-	var currentAnswer = displayNewQuote(quoteArray);
-	var submission = '';
+	nextQuestion();
+	
 	$('#curie').click(function() {
 		submission = 'Curie';
 	});
@@ -9,29 +12,31 @@ $(document).ready(function() {
 	$('#einstein').click(function() {
 		submission = 'Einstein';
 	});
-		
-	$('.buttons').click(function() {
+
+	$('.buttons button').click(function() {
 		if (checkAnswer(submission, currentAnswer) === true) {
 			$('.correct-message').show();
 			score = score + 1;
 			$('.score').empty().append('Score: ' + score);
+			nextQuestion();
 		} else {
 			$('.incorrect-message').show();
+			nextQuestion();
 		}
 	});
-		
-	subtractLastQuoteFromArray(quoteArray);
+
+	
 });
 
-/**
-When a visitor lands on the page, present one quote with two buttons.
 
-$(document).ready(function() {
-	load a random quote from the array
-	load button1
-	load button2
-});
-*/
+var nextQuestion = function() {
+	if (quoteArray.length > 0) {
+		currentAnswer = displayNewQuote(quoteArray);
+		submission = '';
+	} else {
+		alert('Final score is ' + score);
+	}
+}
 
 
 
