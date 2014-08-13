@@ -1,5 +1,26 @@
 $(document).ready(function() {
-	displayNewQuote(quoteArray);
+	var score = 0;
+	var currentAnswer = displayNewQuote(quoteArray);
+	var submission = '';
+	$('#curie').click(function() {
+		submission = 'Curie';
+	});
+		
+	$('#einstein').click(function() {
+		submission = 'Einstein';
+	});
+		
+	$('.buttons').click(function() {
+		if (checkAnswer(submission, currentAnswer) === true) {
+			$('.correct-message').show();
+			score = score + 1;
+			$('.score').empty().append('Score: ' + score);
+		} else {
+			$('.incorrect-message').show();
+		}
+	});
+		
+	subtractLastQuoteFromArray(quoteArray);
 });
 
 /**
@@ -59,7 +80,7 @@ var displayNewQuote = function(array) {
 	var quoteAndAuthorArray = array.pop();
 	$('.quote p').text(quoteAndAuthorArray[0]);   //displays quote
 	
-	return array;				// returns new array for next time
+	return quoteAndAuthorArray[1];				// returns new array for next time
 }
 
 /**
