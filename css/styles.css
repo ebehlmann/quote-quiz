@@ -1,7 +1,45 @@
-.correct-message {
-	display: none;
+.quote {
+	font-family: serif;
+	font-size: 2em;
 }
 
-.incorrect-message {
-	display: none;
+blockquote {
+	border: none;
+}
+
+blockquote:before {
+	font-family: serif;
+	display: block;
+	float: left;
+	margin-right: .5em;
+	font-size: 500%;
+	content: '\201C';
+	color: #bababa;
+}
+
+.author {
+	text-align: center;
+}
+
+img {
+	width: 100%;
+	margin-bottom: 1em;
+}
+
+.feedback, .score {
+	font-family: serif;
+	font-size: 2em;
+	text-align: center;
+}
+
+.feedback .success {
+	color: #4E994E;
+}
+
+.feedback .danger {
+	color: #A30000;
+}
+
+.credits {
+	font-size: 75%;
 }

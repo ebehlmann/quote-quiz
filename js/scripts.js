@@ -49,7 +49,7 @@ var shuffleArray = function(array) {
 var displayNewQuote = function(array) {
 	shuffleArray(array);
 	var quoteAndAuthorArray = array.pop();				// grabs last quote from array, reduces array by 1 quote
-	$('.quote p').text(quoteAndAuthorArray[0]);   //displays quote
+	$('.quote span').text(quoteAndAuthorArray[0]);   //displays quote
 	
 	return quoteAndAuthorArray[1];								// returns author for answer checking
 }
@@ -62,19 +62,21 @@ var nextQuestion = function() {
 	} else {
 		$('.score').empty().append('Final score: ' + score);		// runs when all quotes have run
 		$('.score').addClass( 'final-score' );
-		$('.buttons').hide();
+		$('#curie, #einstein').hide();
 	}
 }
 
 
 var checkAnswer = function(submission, answer) {			// called upon curie or einstein click
 	if (submission === answer) {
-		$('.feedback-text').text('You got it right!');		// gives feedback
+		$('.feedback-text').text('Correct!');		// gives feedback
+		$('.feedback-text').addClass('success');
 		score = score + 1;																// updates score
 		$('.score').empty().append('Score: ' + score);
 		nextQuestion();																		// proceeds to next question
 	} else {
-		$('.feedback-text').text('You got it wrong!');
+		$('.feedback-text').text('Sorry, that\'s not correct');
+		$('.feedback-text').addClass('danger');
 		$('.score').empty().append('Score: ' + score);
 		nextQuestion();
 	}
