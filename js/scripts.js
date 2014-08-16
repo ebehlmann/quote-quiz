@@ -1,16 +1,16 @@
-var currentAnswer = '';
+var currentAnswer = '';							// setup variables
 var submission = '';
 var score = 0;
 
 $(document).ready(function() {
-	nextQuestion();
+	nextQuestion();										//presents the first quote
 	
-	$('#curie').click(function() {
+	$('#curie').click(function() {		// gives feedback on curie click & presents next turn
 		submission = 'Curie';
 		checkAnswer(submission, currentAnswer);
 	});
 		
-	$('#einstein').click(function() {
+	$('#einstein').click(function() {		// gives feedback on einstein click and presents next turn
 		submission = 'Einstein';
 		checkAnswer(submission, currentAnswer);
 	});
@@ -18,16 +18,7 @@ $(document).ready(function() {
 });
 
 
-var nextQuestion = function() {
-	if (quoteArray.length > 0) {
-		currentAnswer = displayNewQuote(quoteArray);
-		submission = '';
-	} else {
-		alert('Final score is ' + score);
-	}
-}
-
-
+// Array contains 10 arrays, each with a quote and author
 
 var quoteArray = [['Nothing in life is to be feared, it is only to be understood. Now is the time to understand more, so that we may fear less.', 'Curie'],
 ['Be less curious about people and more curious about ideas.', 'Curie'], 
@@ -54,36 +45,35 @@ var shuffleArray = function(array) {
     return array;
 }
 
-// grabQuoteFromArray pops the last quote from the array so it can be presented to the user
-// var grabQuoteFromArray = function(array) {
-// 	quote = array.pop();
-// 	return [quote, array];
-// }
 
-var subtractLastQuoteFromArray = function(array) {
-	array.pop();
-	return array;
+var displayNewQuote = function(array) {
+	shuffleArray(array);
+	var quoteAndAuthorArray = array.pop();				// grabs last quote from array, reduces array by 1 quote
+	$('.quote p').text(quoteAndAuthorArray[0]);   //displays quote
+	
+	return quoteAndAuthorArray[1];								// returns author for answer checking
 }
 
 
+var nextQuestion = function() {
+	if (quoteArray.length > 0) {											// continues to run until the array has been emptied
+		currentAnswer = displayNewQuote(quoteArray);		// sets currentAnswer variable to author of current quote
+		submission = '';																// clears submission variable
+	} else {
+		alert('Final score is ' + score);								// runs when all quotes have run
+	}
+}
 
-var checkAnswer = function(submission, answer) {
+
+var checkAnswer = function(submission, answer) {			// called upon curie or einstein click
 	if (submission === answer) {
-		$('.feedback-text').text('You got it right!');
-		score = score + 1;
+		$('.feedback-text').text('You got it right!');		// gives feedback
+		score = score + 1;																// updates score
 		$('.score').empty().append('Score: ' + score);
-		nextQuestion();
+		nextQuestion();																		// proceeds to next question
 	} else {
 		$('.feedback-text').text('You got it wrong!');
 		$('.score').empty().append('Score: ' + score);
 		nextQuestion();
 	}
-}
-
-var displayNewQuote = function(array) {
-	shuffleArray(array);
-	var quoteAndAuthorArray = array.pop();
-	$('.quote p').text(quoteAndAuthorArray[0]);   //displays quote
-	
-	return quoteAndAuthorArray[1];				// returns new array for next time
 }
