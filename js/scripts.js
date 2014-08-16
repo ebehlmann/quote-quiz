@@ -7,24 +7,13 @@ $(document).ready(function() {
 	
 	$('#curie').click(function() {
 		submission = 'Curie';
+		checkAnswer(submission, currentAnswer);
 	});
 		
 	$('#einstein').click(function() {
 		submission = 'Einstein';
+		checkAnswer(submission, currentAnswer);
 	});
-
-	$('.buttons button').click(function() {
-		if (checkAnswer(submission, currentAnswer) === true) {
-			$('.correct-message').show();
-			score = score + 1;
-			$('.score').empty().append('Score: ' + score);
-			nextQuestion();
-		} else {
-			$('.incorrect-message').show();
-			nextQuestion();
-		}
-	});
-
 	
 });
 
@@ -76,8 +65,19 @@ var subtractLastQuoteFromArray = function(array) {
 	return array;
 }
 
+
+
 var checkAnswer = function(submission, answer) {
-	return submission === answer;
+	if (submission === answer) {
+		$('.feedback-text').text('You got it right!');
+		score = score + 1;
+		$('.score').empty().append('Score: ' + score);
+		nextQuestion();
+	} else {
+		$('.feedback-text').text('You got it wrong!');
+		$('.score').empty().append('Score: ' + score);
+		nextQuestion();
+	}
 }
 
 var displayNewQuote = function(array) {
@@ -87,31 +87,3 @@ var displayNewQuote = function(array) {
 	
 	return quoteAndAuthorArray[1];				// returns new array for next time
 }
-
-/**
-var currentQuote = quote[0];
-var currentAuthor = quote[1];
-
-// When a visitor clicks on their answer, show them correct or incorrect.
-
-var quoteArray = [[quotes for first person][quotes for second person]]
-score = 0
-
-take user guess
-if inArray return correct
-else return incorrect
-add to score tally
-
-// Give the option to view another quote, and when clicked laod a new quote for the user to guess on.
-
-load prompt
-if no:
-	load score so far and message
-if yes:
-	load another random quote from an array
-	repeat above block
-	
-// Show score at the end
-
-load score
-*/
