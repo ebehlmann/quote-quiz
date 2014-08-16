@@ -60,7 +60,9 @@ var nextQuestion = function() {
 		currentAnswer = displayNewQuote(quoteArray);		// sets currentAnswer variable to author of current quote
 		submission = '';																// clears submission variable
 	} else {
-		alert('Final score is ' + score);								// runs when all quotes have run
+		$('.score').empty().append('Final score: ' + score);		// runs when all quotes have run
+		$('.score').addClass( 'final-score' );
+		$('.buttons').hide();
 	}
 }
 
