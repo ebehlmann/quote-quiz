@@ -9,8 +9,8 @@
 
 <body>
 	<div class="container">
-		<h1 class="page-header">Who said it?</h1>
-		
+		<h1 class="page-header">Name that scientist</h1>
+		<p class="instructions">Click on the button for the scientist you believe said each quote.</p>
 		<div class="row">
 			<blockquote>
 				<p class="quote"><span class="quote-text"></span></p>
@@ -23,7 +23,7 @@
 					<div class="col-sm-3"></div>
 					<div class="col-sm-8">
 						<img src="img/curie-photo.jpg">
-						<button class="button1 btn btn-default" id="curie">Marie Curie</button>
+						<button class="button1 btn btn-default btn-lg btn-block" id="curie">Marie Curie</button>
 					</div>
 					<div class="col-sm-1"></div>
 				</div>
@@ -34,7 +34,7 @@
 					<div class="col-sm-1"></div>
 					<div class="col-sm-8">
 						<img src="img/einstein-photo.jpg">
-						<button class="button1 btn btn-default" id="einstein">Albert Einstein</button>
+						<button class="button1 btn btn-default btn-lg btn-block" id="einstein">Albert Einstein</button>
 					</div>
 					<div class="col-sm-3"></div>
 				</div>
@@ -42,12 +42,19 @@
 		</div>
 		</div>
 
-		<div class="feedback">
-			<p class="feedback-text"></p>
-		</div>
+		<div class="row">
+			<div class="feedback">
+				<p class="feedback-text"></p>
+			</div>
 
-		<div class="score">
-			<p class="score-text"></p>
+			<div class="score">
+				<p class="score-text"></p>
+			</div>
+			
+			<div class="final-score">
+				<p class="final-score-main"></p>
+				<p class="final-score-category"></p>
+			</div>
 		</div>
 		
 		<div class="row credits">

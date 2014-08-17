@@ -60,9 +60,16 @@ var nextQuestion = function() {
 		currentAnswer = displayNewQuote(quoteArray);		// sets currentAnswer variable to author of current quote
 		submission = '';																// clears submission variable
 	} else {
-		$('.score').empty().append('Final score: ' + score);		// runs when all quotes have run
-		$('.score').addClass( 'final-score' );
-		$('#curie, #einstein').hide();
+		$('.final-score-main').text('Final score: ' + score + '/10');		// runs when all quotes have run
+		$('#curie, #einstein, .feedback-text, .score, .instructions').hide();
+		$('blockquote').slideUp();
+		if (score < 3) {
+			$('.final-score-category').text('Better hit the science books!');
+		} else if (score < 8) {
+			$('.final-score-category').text('Not bad, but you\'re no Einstein.');
+		} else {
+			$('.final-score-category').text('You\'re a certified science whiz!');
+		}
 	}
 }
 
@@ -70,13 +77,13 @@ var nextQuestion = function() {
 var checkAnswer = function(submission, answer) {			// called upon curie or einstein click
 	if (submission === answer) {
 		$('.feedback-text').text('Correct!');		// gives feedback
-		$('.feedback-text').addClass('success');
+		$('.feedback-text').css('color', '#4E994E');
 		score = score + 1;																// updates score
 		$('.score').empty().append('Score: ' + score);
 		nextQuestion();																		// proceeds to next question
 	} else {
 		$('.feedback-text').text('Sorry, that\'s not correct');
-		$('.feedback-text').addClass('danger');
+		$('.feedback-text').css('color', '#A30000');
 		$('.score').empty().append('Score: ' + score);
 		nextQuestion();
 	}
