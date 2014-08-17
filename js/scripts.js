@@ -3,17 +3,17 @@ var submission = '';
 var score = 0;
 
 $(document).ready(function() {
-	nextQuestion();										//presents the first quote
+  nextQuestion();										//presents the first quote
 	
-	$('#curie').click(function() {		// gives feedback on curie click & presents next turn
-		submission = 'Curie';
-		checkAnswer(submission, currentAnswer);
-	});
+  $('#curie').click(function() {		// gives feedback on curie click & presents next turn
+    submission = 'Curie';
+    checkAnswer(submission, currentAnswer);
+  });
 		
-	$('#einstein').click(function() {		// gives feedback on einstein click and presents next turn
-		submission = 'Einstein';
-		checkAnswer(submission, currentAnswer);
-	});
+  $('#einstein').click(function() {		// gives feedback on einstein click and presents next turn
+    submission = 'Einstein';
+    checkAnswer(submission, currentAnswer);
+  });
 	
 });
 
