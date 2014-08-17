@@ -36,55 +36,55 @@ Builds a new version of the array by picking a random element to include first,
 excluding it, then picking again, etc.
 */
 var shuffleArray = function(array) {
-	for (var i = array.length - 1; i > 0; i--) {
-		var j = Math.floor(Math.random() * (i + 1));
-		var temp = array[i];
-		array[i] = array[j];
-		array[j] = temp;
-	}
-	return array;
+  for (var i = array.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
 }
 
 
 var displayNewQuote = function(array) {
-	shuffleArray(array);
-	var quoteAndAuthorArray = array.pop();				// grabs last quote from array, reduces array by 1 quote
-	$('.quote span').text(quoteAndAuthorArray[0]);   //displays quote
+  shuffleArray(array);
+  var quoteAndAuthorArray = array.pop();				// grabs last quote from array, reduces array by 1 quote
+  $('.quote span').text(quoteAndAuthorArray[0]);   //displays quote
 	
-	return quoteAndAuthorArray[1];								// returns author for answer checking
+  return quoteAndAuthorArray[1];								// returns author for answer checking
 }
 
 
 var nextQuestion = function() {
-	if (quoteArray.length > 0) {											// continues to run until the array has been emptied
-		currentAnswer = displayNewQuote(quoteArray);		// sets currentAnswer variable to author of current quote
-		submission = '';																// clears submission variable
-	} else {
-		$('.final-score-main').text('Final score: ' + score + '/10');		// runs when all quotes have run
-		$('#curie, #einstein, .feedback-text, .score, .instructions').hide();
-		$('blockquote').slideUp();
-		if (score < 3) {
-			$('.final-score-category').text('Better hit the science books!');
-		} else if (score < 8) {
-			$('.final-score-category').text('Not bad, but you\'re no Einstein.');
-		} else {
-			$('.final-score-category').text('You\'re a certified science whiz!');
-		}
-	}
+  if (quoteArray.length > 0) {											// continues to run until the array has been emptied
+    currentAnswer = displayNewQuote(quoteArray);		// sets currentAnswer variable to author of current quote
+    submission = '';																// clears submission variable
+  } else {
+    $('.final-score-main').text('Final score: ' + score + '/10');		// runs when all quotes have run
+    $('#curie, #einstein, .feedback-text, .score, .instructions').hide();
+    $('blockquote').slideUp();
+    if (score < 3) {
+      $('.final-score-category').text('Better hit the science books!');
+    } else if (score < 8) {
+      $('.final-score-category').text('Not bad, but you\'re no Einstein.');
+    } else {
+      $('.final-score-category').text('You\'re a certified science whiz!');
+    }
+  }
 }
 
 
 var checkAnswer = function(submission, answer) {			// called upon curie or einstein click
-	if (submission === answer) {
-		$('.feedback-text').text('Correct!');		// gives feedback
-		$('.feedback-text').css('color', '#4E994E');
-		score = score + 1;																// updates score
-		$('.score').empty().append('Score: ' + score);
-		nextQuestion();																		// proceeds to next question
-	} else {
-		$('.feedback-text').text('Sorry, that\'s not correct');
-		$('.feedback-text').css('color', '#A30000');
-		$('.score').empty().append('Score: ' + score);
-		nextQuestion();
-	}
+  if (submission === answer) {
+    $('.feedback-text').text('Correct!');		// gives feedback
+    $('.feedback-text').css('color', '#4E994E');
+    score = score + 1;																// updates score
+    $('.score').empty().append('Score: ' + score);
+    nextQuestion();																		// proceeds to next question
+  } else {
+    $('.feedback-text').text('Sorry, that\'s not correct');
+    $('.feedback-text').css('color', '#A30000');
+    $('.score').empty().append('Score: ' + score);
+    nextQuestion();
+  }
 }
